@@ -1,27 +1,19 @@
-import numpy as np
+from perceptron import Perceptron
+from sklearn.datasets import make_blobs
 
-class Perceptron():
-    def __init__(self,feat_nb,obs_nb):
-        self.weight=np.random.rand(1,feat_nb)
-        self.biais=np.random.rand(1)
-
-    def forward(self,x):
-        return self.weight*x +self.biais
-
-    def softmax(self,Z):
-        A = np.exp(Z) / sum(np.exp(Z))
-        return A
-    #def train(self):
+X, y = make_blobs(n_samples=100, n_features=2, centers=2, random_state=0)
+y = y.reshape((y.shape[0], 1))
 
 
-perceptron=Perceptron(1,4)
-x=np.random.rand(4,3)
-x=x.T
-s=perceptron.softmax(perceptron.forward(x))
-print(s)
+choice=input('Choose your ANN')
+if choice==1:
+    pass
+else:
+    pass
 
 
-def get_predictions(A2):
-    return np.argmax(A2, 0)
 
-print(get_predictions(s))
+p=Perceptron(X,y,epoch=10000,lr=1e-1)
+p.fit(X,y)
+print(X[1],y[1])
+print(p.predict(X[1]))
